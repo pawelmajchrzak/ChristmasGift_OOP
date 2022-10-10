@@ -9,4 +9,6 @@ Dla każdej osoby, stworzenie pliku o nazwie email - do której ten plik ma być
 Robisz prezent dla osoby: imię i nazwisko
 
 Plan programu:
-1. Przyjęcie zmiennych z pliku: dane.txt
+1. Przyjęcie zmiennych z pliku: dane.txt 
+	- przyjęcie całej lini do stringa i podzielenie na dwie zmienne po drugiej spacji konkatenacja
+2. Zapisanie zmiennych do struktury
