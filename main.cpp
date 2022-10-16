@@ -129,9 +129,17 @@ void displayPersonData(Person person)
 void giftDraw(int* tableOfPersons, int numberOfPersons)
 {
     srand(time(NULL));
-    tableOfPersons[0] = rand()%numberOfPersons+1;
+
     for (int i=0; i<numberOfPersons; i++)
     {
-
+        tableOfPersons[i] = rand()%numberOfPersons;
+        for (int j=0; j<numberOfPersons; j++)
+        {
+            if (tableOfPersons[i]==tableOfPersons[j]&&i!=j)
+            {
+                tableOfPersons[i] = rand()%numberOfPersons;
+                j=0;
+            }
+        }
     }
 }
