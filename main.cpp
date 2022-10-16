@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <cstdlib>
+#include <time.h>
 
 using namespace std;
 
@@ -11,6 +13,7 @@ struct Person
 {
     int id = 0;
     string name = "", email = "";
+    int makeGiftForId=-1;
 };
 
 string loadLine();
@@ -21,6 +24,8 @@ Person loadPersonData(string dataForOnePersonInLineWithSpaces);
 void loadPersonsFromFile(vector <Person> &persons);
 void displayPersonData(Person person);
 
+void giftDraw(int tableOfPersons[], int numberOfPersons);
+
 
 
 int main()
@@ -29,13 +34,26 @@ int main()
     loadPersonsFromFile(persons);
     int numbersOfPersons=persons.size();
 
+    int tableOfPersons[numbersOfPersons];
+    for (int i=0; i<numbersOfPersons; i++) tableOfPersons[i]=-2;
+    giftDraw(tableOfPersons,numbersOfPersons);
+
+
     cout << numbersOfPersons<< endl;
 
-    //vector <Person>::iterator  iter = persons.begin();
-    auto iter= persons.begin();
-    //iter-=2;
-    displayPersonData(*(iter+0));
+    for (int i=0; i<numbersOfPersons; i++)
+    {
+        //tableOfPersons[i]=i;
+        cout <<tableOfPersons[i] << " ";
+    }
+    cout << endl;
 
+
+
+
+
+    auto iter= persons.begin();
+    displayPersonData(*(iter+0));
     for (vector <Person>::iterator  itr = persons.begin(); itr != persons.end(); itr++)
     {
             displayPersonData(*itr);
@@ -105,4 +123,15 @@ void displayPersonData(Person person)
     cout << endl << "Id:               " << person.id << endl;
     cout <<         "Imie i nazwisko:  " << person.name << endl;
     cout <<         "Email:            " << person.email << endl;
+    cout <<         "Robie prezent dla:" << person.makeGiftForId << endl;
+}
+
+void giftDraw(int* tableOfPersons, int numberOfPersons)
+{
+    srand(time(NULL));
+    tableOfPersons[0] = rand()%numberOfPersons+1;
+    for (int i=0; i<numberOfPersons; i++)
+    {
+
+    }
 }
