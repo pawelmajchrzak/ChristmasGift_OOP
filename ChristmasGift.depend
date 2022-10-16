@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1665952993 source:c:\users\pawel\documents\test\christmasgift\main.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<vector>
+	<algorithm>
+	<sstream>
+	<cstdlib>
+	<time.h>
+
