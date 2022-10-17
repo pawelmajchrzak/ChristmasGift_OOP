@@ -25,7 +25,7 @@ void loadPersonsFromFile(vector <Person> &persons);
 void displayPersonData(Person person);
 
 void giftDraw(int tableOfPersons[], int numberOfPersons);
-
+void assigningDrawToPersons(vector <Person> &persons,int tableOfPersons[]);
 
 
 int main()
@@ -37,9 +37,10 @@ int main()
     int tableOfPersons[numbersOfPersons];
     for (int i=0; i<numbersOfPersons; i++) tableOfPersons[i]=-2;
     giftDraw(tableOfPersons,numbersOfPersons);
+    assigningDrawToPersons(persons,tableOfPersons);
 
 
-    cout << numbersOfPersons<< endl;
+
 
     for (int i=0; i<numbersOfPersons; i++)
     {
@@ -49,11 +50,9 @@ int main()
     cout << endl;
 
 
-
-
-
     auto iter= persons.begin();
-    displayPersonData(*(iter+0));
+    //displayPersonData(*(iter+0));
+
     for (vector <Person>::iterator  itr = persons.begin(); itr != persons.end(); itr++)
     {
             displayPersonData(*itr);
@@ -138,8 +137,23 @@ void giftDraw(int* tableOfPersons, int numberOfPersons)
             if (tableOfPersons[i]==tableOfPersons[j]&&i!=j)
             {
                 tableOfPersons[i] = rand()%numberOfPersons;
-                j=0;
+                j=-1;
+            }
+            else if (tableOfPersons[i]==i)
+            {
+                tableOfPersons[i] = rand()%numberOfPersons;
+                j=-1;
             }
         }
     }
 }
+
+void assigningDrawToPersons(vector <Person> &persons,int* tableOfPersons)
+{
+    for (int i = 0; i < persons.size(); i++)
+    {
+        persons[i].makeGiftForId = tableOfPersons[i];
+    }
+}
+
+
