@@ -11,7 +11,7 @@ using namespace std;
 
 struct Person
 {
-    int id = 0;
+    int id = -1;
     string name = "", email = "";
     int makeGiftForId=-1;
 };
@@ -35,7 +35,7 @@ int main()
     int numbersOfPersons=persons.size();
 
     int tableOfPersons[numbersOfPersons];
-    for (int i=0; i<numbersOfPersons; i++) tableOfPersons[i]=-2;
+
     giftDraw(tableOfPersons,numbersOfPersons);
     assigningDrawToPersons(persons,tableOfPersons);
 
@@ -87,7 +87,7 @@ void loadPersonsFromFile(vector <Person> &persons)
 
     fstream textFile;
     textFile.open("PersonsData.txt", ios::in);
-    int numberOfPerson=0;
+    int numberOfPerson=-1;
 
     if (textFile.good() == true)
     {
@@ -128,24 +128,29 @@ void displayPersonData(Person person)
 void giftDraw(int* tableOfPersons, int numberOfPersons)
 {
     srand(time(NULL));
-
-    for (int i=0; i<numberOfPersons; i++)
+    //tableOfPersons[numberOfPersons-1]=numberOfPersons-1;
+    do
     {
-        tableOfPersons[i] = rand()%numberOfPersons;
-        for (int j=0; j<numberOfPersons; j++)
+        for (int i=0; i<numberOfPersons; i++) tableOfPersons[i]=-2;
+
+        for (int i=0; i<numberOfPersons; i++)
         {
-            if (tableOfPersons[i]==tableOfPersons[j]&&i!=j)
+
+            tableOfPersons[i] = rand()%numberOfPersons;
+
+
+            for (int j=0; j<numberOfPersons; j++)
             {
-                tableOfPersons[i] = rand()%numberOfPersons;
-                j=-1;
-            }
-            else if (tableOfPersons[i]==i)
-            {
-                tableOfPersons[i] = rand()%numberOfPersons;
-                j=-1;
+                cout << tableOfPersons[i] << "->" << i << endl;
+
+                if ((tableOfPersons[i]==tableOfPersons[j]&&i!=j)||(tableOfPersons[i]==i&&tableOfPersons[numberOfPersons-1]!=numberOfPersons-1))
+                {
+                    tableOfPersons[i] = rand()%numberOfPersons;
+                    j=-1;
+                }
             }
         }
-    }
+    } while (tableOfPersons[numberOfPersons-1]==numberOfPersons-1);
 }
 
 void assigningDrawToPersons(vector <Person> &persons,int* tableOfPersons)
