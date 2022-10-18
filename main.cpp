@@ -26,6 +26,7 @@ void displayPersonData(Person person);
 
 void giftDraw(int tableOfPersons[], int numberOfPersons);
 void assigningDrawToPersons(vector <Person> &persons,int tableOfPersons[]);
+void createOutputTextFileForPersons(vector <Person> persons);
 
 
 int main()
@@ -38,7 +39,7 @@ int main()
 
     giftDraw(tableOfPersons,numbersOfPersons);
     assigningDrawToPersons(persons,tableOfPersons);
-
+    createOutputTextFileForPersons(persons);
 
 
 
@@ -128,7 +129,6 @@ void displayPersonData(Person person)
 void giftDraw(int* tableOfPersons, int numberOfPersons)
 {
     srand(time(NULL));
-    //tableOfPersons[numberOfPersons-1]=numberOfPersons-1;
     do
     {
         for (int i=0; i<numberOfPersons; i++) tableOfPersons[i]=-2;
@@ -137,7 +137,6 @@ void giftDraw(int* tableOfPersons, int numberOfPersons)
         {
 
             tableOfPersons[i] = rand()%numberOfPersons;
-
 
             for (int j=0; j<numberOfPersons; j++)
             {
@@ -150,7 +149,8 @@ void giftDraw(int* tableOfPersons, int numberOfPersons)
                 }
             }
         }
-    } while (tableOfPersons[numberOfPersons-1]==numberOfPersons-1);
+    }
+    while (tableOfPersons[numberOfPersons-1]==numberOfPersons-1);
 }
 
 void assigningDrawToPersons(vector <Person> &persons,int* tableOfPersons)
@@ -161,4 +161,16 @@ void assigningDrawToPersons(vector <Person> &persons,int* tableOfPersons)
     }
 }
 
+void createOutputTextFileForPersons(vector <Person> persons)
+{
+    for (int i=0; i< persons.size(); i++)
+    {
+        fstream file;
+        string fileName="WyslijDo"+persons[i].email+".txt";
+        file.open(fileName,ios::out);
+        file<< "Masz przygotowac prezent dla osoby: " << persons[persons[i].makeGiftForId].name << endl;
+        file.close();
+    }
+
+}
 
