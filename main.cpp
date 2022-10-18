@@ -22,7 +22,6 @@ int convertStringToInt(string number);
 
 Person loadPersonData(string dataForOnePersonInLineWithSpaces);
 void loadPersonsFromFile(vector <Person> &persons);
-void displayPersonData(Person person);
 
 void giftDraw(int tableOfPersons[], int numberOfPersons);
 void assigningDrawToPersons(vector <Person> &persons,int tableOfPersons[]);
@@ -34,31 +33,11 @@ int main()
     vector <Person> persons;
     loadPersonsFromFile(persons);
     int numbersOfPersons=persons.size();
-
     int tableOfPersons[numbersOfPersons];
 
     giftDraw(tableOfPersons,numbersOfPersons);
     assigningDrawToPersons(persons,tableOfPersons);
     createOutputTextFileForPersons(persons);
-
-
-
-    for (int i=0; i<numbersOfPersons; i++)
-    {
-        //tableOfPersons[i]=i;
-        cout <<tableOfPersons[i] << " ";
-    }
-    cout << endl;
-
-
-    auto iter= persons.begin();
-    //displayPersonData(*(iter+0));
-
-    for (vector <Person>::iterator  itr = persons.begin(); itr != persons.end(); itr++)
-    {
-            displayPersonData(*itr);
-    }
-
 
     return 0;
 }
@@ -75,17 +54,13 @@ int convertStringToInt(string number)
     int numberInt;
     istringstream iss(number);
     iss >> numberInt;
-
     return numberInt;
 }
-
-
 
 void loadPersonsFromFile(vector <Person> &persons)
 {
     Person person;
     string dataForOnePersonInLineWithSpaces = "";
-
     fstream textFile;
     textFile.open("PersonsData.txt", ios::in);
     int numberOfPerson=-1;
@@ -118,14 +93,6 @@ Person loadPersonData(string dataForOnePersonInLineWithSpaces)
     return person;
 }
 
-void displayPersonData(Person person)
-{
-    cout << endl << "Id:               " << person.id << endl;
-    cout <<         "Imie i nazwisko:  " << person.name << endl;
-    cout <<         "Email:            " << person.email << endl;
-    cout <<         "Robie prezent dla:" << person.makeGiftForId << endl;
-}
-
 void giftDraw(int* tableOfPersons, int numberOfPersons)
 {
     srand(time(NULL));
@@ -135,13 +102,9 @@ void giftDraw(int* tableOfPersons, int numberOfPersons)
 
         for (int i=0; i<numberOfPersons; i++)
         {
-
             tableOfPersons[i] = rand()%numberOfPersons;
-
             for (int j=0; j<numberOfPersons; j++)
             {
-                cout << tableOfPersons[i] << "->" << i << endl;
-
                 if ((tableOfPersons[i]==tableOfPersons[j]&&i!=j)||(tableOfPersons[i]==i&&tableOfPersons[numberOfPersons-1]!=numberOfPersons-1))
                 {
                     tableOfPersons[i] = rand()%numberOfPersons;
@@ -171,6 +134,6 @@ void createOutputTextFileForPersons(vector <Person> persons)
         file<< "Masz przygotowac prezent dla osoby: " << persons[persons[i].makeGiftForId].name << endl;
         file.close();
     }
-
+    cout << "Wszystko sie udalo! Kazdy zaraz sie dowie komu robi prezent, musisz tylko powysylac maile!" << endl;
 }
 
